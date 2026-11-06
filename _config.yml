@@ -13,6 +13,7 @@ repository               : "Coatkroadapt/LJT-Homepage"
 
 # Site Author (fields left blank are not shown in the sidebar)
 author:
+  avatar           : "https://github.com/Vicent0205.png"
   name             : "Junteng Liu"
   bio              : "Ph.D. candidate in the HKUST NLP Group. Research focuses on natural language processing and machine learning, including LLM reasoning, hallucination in vision-language models (VLMs), and LLM truthfulness and interpretability."
   location         : "Hong Kong"

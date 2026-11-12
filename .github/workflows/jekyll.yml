@@ -1,15 +1,59 @@
-name: Deploy Academic Pages template site to Pages
+name: Build and deploy homepage
 
 on:
+  push:
+    branches: ["master"]
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+
+concurrency:
+  group: homepage-deployment
+  cancel-in-progress: false
 
 jobs:
-  noop:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-24.04
     steps:
-      - run: echo ok
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.328.0
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Install UglifyJS
+        run: npm install -g uglify-js
+
+      - name: Minify JS files
+        run: |
+          uglifyjs assets/js/plugins/jquery.greedy-navigation.js assets/js/_main.js assets/js/theme.js -c -m -o assets/js/main.min.js
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "/LJT-Homepage"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Deploy built site to gh-pages branch
+        run: |
+          set -euo pipefail
+          git worktree add --detach ../pages-deploy
+          cd ../pages-deploy
+          git checkout --orphan built-pages
+          git rm -rf .
+          find "$GITHUB_WORKSPACE/_site" -mindepth 1 -maxdepth 1 -exec cp -a {} . \;
+          touch .nojekyll
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Deploy Junteng Liu homepage"
+          git push --force origin HEAD:gh-pages

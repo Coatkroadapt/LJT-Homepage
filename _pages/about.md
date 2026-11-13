@@ -1,7 +1,7 @@
 ---
 layout: single
 permalink: /
-title: "Junteng Liu"
+title: "About"
 author_profile: true
 ---
 

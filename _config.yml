@@ -11,12 +11,12 @@ repository: "Coatkroadapt/LJT-Homepage"
 
 # Site author / sidebar profile
 author:
-  avatar: ""
+  avatar:
   name: "Junteng Liu"
   bio: >-
     First-year PhD candidate at HKUST NLP Group. Research focuses on natural language processing and machine learning, including LLM reasoning and reinforcement learning, hallucination in vision-language models, and LLM truthfulness and interpretability.
   employer: "Hong Kong University of Science and Technology"
-  uri: ""
+  uri:
   email: "jliugi@connect.ust.hk"
   googlescholar: "https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate"
   github: "Vicent0205"
@@ -39,12 +39,20 @@ comments:
   provider: false
 atom_feed:
   hide: false
-  path: ""
-teaser: ""
-og_image: ""
-og_description: ""
+  path:
+teaser:
+og_image:
+og_description:
 twitter:
   username: "junteng88716710"
+social:
+  type: Person
+  name: "Junteng Liu"
+  links:
+    - "mailto:jliugi@connect.ust.hk"
+    - "https://github.com/Vicent0205"
+    - "https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate"
+    - "https://x.com/junteng88716710"
 
 include:
   - .htaccess
@@ -58,6 +66,7 @@ exclude:
   - .github
   - .jekyll-assets-cache
   - .sass-cache
+  - AGENTS.md
   - assets/js/_main.js
   - assets/js/plugins
   - assets/js/vendor
@@ -85,6 +94,11 @@ exclude:
   - talkmap_out.ipynb
   - tmp
   - vendor
+  - _drafts
+  - _portfolio
+  - _posts
+  - _talks
+  - _teaching
 keep_files:
   - .git
   - .svn
@@ -112,8 +126,6 @@ kramdown:
 
 # Collections used by this site
 collections:
-  posts:
-    output: false
   publications:
     output: true
     permalink: /publications/:name/

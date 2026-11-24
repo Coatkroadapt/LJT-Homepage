@@ -1,0 +1,21 @@
+name: Update Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download config
+        run: |
+          curl -sL "https://raw.githubusercontent.com/Coatkroadapt/LJT-Homepage/master/_config.yml" -o _config.yml
+          echo "Downloaded config"
+      - name: Commit
+        run: |
+          git config --local user.email "michelleadamsl304@gmail.com"
+          git config --local user.name "Coatkroadapt"
+          git add _config.yml
+          git commit -m "Update _config.yml" || echo "No changes"
+          git push
